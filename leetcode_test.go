@@ -1,6 +1,7 @@
 package leetcode
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -17,4 +18,9 @@ func Test_findUnsortedSubarray(t *testing.T) {
 	if 5 != res {
 		panic(res)
 	}
+}
+
+func Test_plusOne(t *testing.T) {
+	res := plusOne([]int{9, 9, 9, 9})
+	fmt.Println(res)
 }
