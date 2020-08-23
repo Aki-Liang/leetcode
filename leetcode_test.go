@@ -24,3 +24,8 @@ func Test_plusOne(t *testing.T) {
 	res := plusOne([]int{9, 9, 9, 9})
 	fmt.Println(res)
 }
+
+func Test_rangeBitwiseAnd(t *testing.T) {
+	res := rangeBitwiseAndV2(5, 7)
+	fmt.Println(res)
+}
