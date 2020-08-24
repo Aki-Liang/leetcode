@@ -35,6 +35,31 @@ func Test_threeSum(t *testing.T) {
 	fmt.Println(res)
 }
 func Test_rangeBitwiseAnd(t *testing.T) {
-	res := rangeBitwiseAndV2(5, 7)
+	res := rangeBitwiseAnd(5, 7)
 	fmt.Println(res)
+}
+
+func Test_climbStairs(t *testing.T) {
+	res := climbStairs(3)
+	fmt.Println(res)
+}
+
+func Test_moveZeroes(t *testing.T) {
+	nums := []int{0, 1, 0, 3, 12}
+	moveZeroes(nums)
+}
+
+func Test_LRUCache(t *testing.T) {
+	cache := Constructor(2)
+
+	cache.Put(1, 1)
+	cache.Put(2, 2)
+	cache.Get(1)    // 返回  1
+	cache.Put(3, 3) // 该操作会使得关键字 2 作废
+	cache.Get(2)    // 返回 -1 (未找到)
+	cache.Put(4, 4) // 该操作会使得关键字 1 作废
+	cache.Get(1)    // 返回 -1 (未找到)
+	cache.Get(3)    // 返回  3
+	cache.Get(4)    // 返回  4
+
 }
