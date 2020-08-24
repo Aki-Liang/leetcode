@@ -24,3 +24,13 @@ func Test_plusOne(t *testing.T) {
 	res := plusOne([]int{9, 9, 9, 9})
 	fmt.Println(res)
 }
+
+func Test_twoSum(t *testing.T) {
+	res := twoSum([]int{3, 3}, 6)
+	fmt.Println(res)
+}
+
+func Test_threeSum(t *testing.T) {
+	res := threeSum([]int{-1, 0, 1, 2, -1, -4})
+	fmt.Println(res)
+}
