@@ -22,15 +22,29 @@ package leetcode
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 func plusOne(digits []int) []int {
+	length := len(digits)
 
-	for i := len(digits) - 1; i >= 0; i-- {
-		if digits[i] == 9 {
+	for i := length - 1; i >= 0; i-- {
+		if 9 == digits[i] {
 			digits[i] = 0
 		} else {
 			digits[i] = digits[i] + 1
 			return digits
 		}
 	}
-
 	return append([]int{1}, digits...)
 }
+
+// func plusOne(digits []int) []int {
+
+// 	for i := len(digits) - 1; i >= 0; i-- {
+// 		if digits[i] == 9 {
+// 			digits[i] = 0
+// 		} else {
+// 			digits[i] = digits[i] + 1
+// 			return digits
+// 		}
+// 	}
+
+// 	return append([]int{1}, digits...)
+// }
