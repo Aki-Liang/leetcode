@@ -50,17 +50,17 @@ func Test_moveZeroes(t *testing.T) {
 }
 
 func Test_LRUCache(t *testing.T) {
-	cache := Constructor(2)
+	// cache := Constructor(2)
 
-	cache.Put(1, 1)
-	cache.Put(2, 2)
-	cache.Get(1)    // 返回  1
-	cache.Put(3, 3) // 该操作会使得关键字 2 作废
-	cache.Get(2)    // 返回 -1 (未找到)
-	cache.Put(4, 4) // 该操作会使得关键字 1 作废
-	cache.Get(1)    // 返回 -1 (未找到)
-	cache.Get(3)    // 返回  3
-	cache.Get(4)    // 返回  4
+	// cache.Put(1, 1)
+	// cache.Put(2, 2)
+	// cache.Get(1)    // 返回  1
+	// cache.Put(3, 3) // 该操作会使得关键字 2 作废
+	// cache.Get(2)    // 返回 -1 (未找到)
+	// cache.Put(4, 4) // 该操作会使得关键字 1 作废
+	// cache.Get(1)    // 返回 -1 (未找到)
+	// cache.Get(3)    // 返回  3
+	// cache.Get(4)    // 返回  4
 
 }
 
@@ -77,5 +77,10 @@ func Test_merge(t *testing.T) {
 
 func Test_maxArea(t *testing.T) {
 	res := maxArea([]int{1, 8, 6, 2, 5, 4, 8, 3, 7})
+	fmt.Println(res)
+}
+
+func Test_isValid(t *testing.T) {
+	res := isValid("(")
 	fmt.Println(res)
 }
