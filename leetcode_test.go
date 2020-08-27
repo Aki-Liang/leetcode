@@ -104,3 +104,23 @@ func Test_swapPairs(t *testing.T) {
 	res := swapPairs(Node)
 	fmt.Println(res)
 }
+
+func Test_reverseKGroup(t *testing.T) {
+	//1->2->3->4
+	Node := &ListNode{
+		Val: 1,
+		Next: &ListNode{
+			Val: 2,
+			Next: &ListNode{
+				Val: 3,
+				Next: &ListNode{
+					Val:  4,
+					Next: nil,
+				},
+			},
+		},
+	}
+
+	res := reverseKGroup(Node, 2)
+	fmt.Println(res)
+}
