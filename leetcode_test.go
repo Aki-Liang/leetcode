@@ -81,6 +81,26 @@ func Test_maxArea(t *testing.T) {
 }
 
 func Test_isValid(t *testing.T) {
-	res := isValid("(")
+	res := isValid("}")
+	fmt.Println(res)
+}
+
+func Test_swapPairs(t *testing.T) {
+	//1->2->3->4
+	Node := &ListNode{
+		Val: 1,
+		Next: &ListNode{
+			Val: 2,
+			Next: &ListNode{
+				Val: 3,
+				Next: &ListNode{
+					Val:  4,
+					Next: nil,
+				},
+			},
+		},
+	}
+
+	res := swapPairs(Node)
 	fmt.Println(res)
 }
