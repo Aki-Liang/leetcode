@@ -124,3 +124,12 @@ func Test_reverseKGroup(t *testing.T) {
 	res := reverseKGroup(Node, 2)
 	fmt.Println(res)
 }
+
+func Test_rotate(t *testing.T) {
+	rotate([]int{1, 2, 3, 4, 5, 6, 7, 8}, 3)
+
+}
+
+func Test_isUnique(t *testing.T) {
+	fmt.Println(isUnique("abc"))
+}
