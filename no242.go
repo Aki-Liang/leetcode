@@ -92,7 +92,7 @@ func isAnagram(s string, t string) bool {
 	go func() {
 		defer wg.Done()
 		for i := 0; i < len(t); i++ {
-			j := t[i] - j
+			j := t[i] - 'a'
 			tBitMap[j]++
 		}
 	}()
