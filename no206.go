@@ -27,15 +27,10 @@ func reverseList(head *ListNode) *ListNode {
 }
 
 // 循环法
-// func reverseList(head *ListNode) *ListNode {
-
-// 	var prev *ListNode
-// 	curr := head
-// 	if curr != nil {
-// 		tmp := curr.Next
-// 		curr.Next = prev
-// 		prev = curr
-// 		curr = tmp
-// 	}
-// 	return prev
-// }
+func reverseListV2(head *ListNode) *ListNode {
+	var prev *ListNode
+	for head != nil {
+		head.Next, head, prev = prev, head.Next, head
+	}
+	return prev
+}
