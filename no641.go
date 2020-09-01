@@ -1,7 +1,7 @@
 package leetcode
 
-设计实现双端队列。
-你的实现需要支持以下操作：
+// 设计实现双端队列。
+// 你的实现需要支持以下操作：
 
 // MyCircularDeque(k)：构造函数,双端队列的大小为k。
 // insertFront()：将一个元素添加到双端队列头部。 如果操作成功返回 true。
@@ -24,8 +24,8 @@ package leetcode
 // circularDeque.deleteLast();			        // 返回 true
 // circularDeque.insertFront(4);			        // 返回 true
 // circularDeque.getFront();				// 返回 4
-//  
-//  
+//
+//
 
 // 提示：
 
@@ -37,28 +37,25 @@ package leetcode
 // 链接：https://leetcode-cn.com/problems/design-circular-deque
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
-
 type MyCircularDeque struct {
-	data []int
+	data  []int
 	front int
-	end int
+	end   int
 }
-
 
 /** Initialize your data structure here. Set the size of the deque to be k. */
 func Constructor(k int) MyCircularDeque {
 	res := MyCircularDeque{
-		data: make([]int, k+1, k+1),
-		front:0,
-		end:0,
+		data:  make([]int, k+1, k+1),
+		front: 0,
+		end:   0,
 	}
 	return res
 }
 
-
 /** Adds an item at the front of Deque. Return true if the operation is successful. */
 func (this *MyCircularDeque) InsertFront(value int) bool {
-	if this.IsFull(){
+	if this.IsFull() {
 		return false
 	}
 	this.front = (len(this.data) + this.front - 1) % len(this.data)
@@ -66,10 +63,9 @@ func (this *MyCircularDeque) InsertFront(value int) bool {
 	return true
 }
 
-
 /** Adds an item at the rear of Deque. Return true if the operation is successful. */
 func (this *MyCircularDeque) InsertLast(value int) bool {
-	if this.IsFull(){
+	if this.IsFull() {
 		return false
 	}
 
@@ -78,59 +74,52 @@ func (this *MyCircularDeque) InsertLast(value int) bool {
 	return true
 }
 
-
 /** Deletes an item from the front of Deque. Return true if the operation is successful. */
 func (this *MyCircularDeque) DeleteFront() bool {
-	if this.IsEmpty(){
+	if this.IsEmpty() {
 		return false
 	}
 	this.front = (this.front + 1) % len(this.data)
 	return true
 }
 
-
 /** Deletes an item from the rear of Deque. Return true if the operation is successful. */
 func (this *MyCircularDeque) DeleteLast() bool {
-	if this.IsEmpty(){
+	if this.IsEmpty() {
 		return false
 	}
 	this.end = (len(this.data) + this.end - 1) % len(this.data)
 	return true
 }
 
-
 /** Get the front item from the deque. */
 func (this *MyCircularDeque) GetFront() int {
-	if this.IsEmpty(){
+	if this.IsEmpty() {
 		return -1
 	}
 
 	return this.data[this.front]
 }
 
-
 /** Get the last item from the deque. */
 func (this *MyCircularDeque) GetRear() int {
-	if this.IsEmpty(){
+	if this.IsEmpty() {
 		return -1
 	}
 
-	return this.data[(len(this.data) + this.end - 1) % len(this.data)]
+	return this.data[(len(this.data)+this.end-1)%len(this.data)]
 }
-
 
 /** Checks whether the circular deque is empty or not. */
 func (this *MyCircularDeque) IsEmpty() bool {
 	return this.front == this.end
 }
 
-
 /** Checks whether the circular deque is full or not. */
 func (this *MyCircularDeque) IsFull() bool {
 
-	return (this.end + 1) % len(this.data) == this.front
+	return (this.end+1)%len(this.data) == this.front
 }
-
 
 /**
  * Your MyCircularDeque object will be instantiated and called as such:

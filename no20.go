@@ -12,43 +12,61 @@ package leetcode
 // 链接：https://leetcode-cn.com/problems/valid-parentheses
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
-import (
-	"container/list"
-)
-
 func isValid(s string) bool {
-	if "" == s {
-		return true
-	}
-	if len(s) < 2 {
-		return false
-	}
-	myList := list.New()
 	dic := map[byte]byte{
 		')': '(',
 		'}': '{',
 		']': '[',
 	}
-	str := []byte(s)
-	for _, b := range str {
-		pair, ok := dic[b]
+	stack := []byte{}
+	for i := 0; i < len(s); i++ {
+		p, ok := dic[s[i]]
 		if ok {
-			e := myList.Back()
-			if nil == e {
+			if len(stack) == 0 || p != stack[len(stack)-1] {
 				return false
 			}
-			v := e.Value.(byte)
-			if pair != v {
-				return false
-			}
-			myList.Remove(e)
+			stack = stack[:len(stack)-1]
 		} else {
-			myList.PushBack(b)
+			stack = append(stack, s[i])
 		}
 	}
 
-	if myList.Len() > 0 {
-		return false
-	}
-	return true
+	return len(stack) == 0
 }
+
+// func isValid(s string) bool {
+// 	if "" == s {
+// 		return true
+// 	}
+// 	if len(s) < 2 {
+// 		return false
+// 	}
+// 	myList := list.New()
+// 	dic := map[byte]byte{
+// 		')': '(',
+// 		'}': '{',
+// 		']': '[',
+// 	}
+// 	str := []byte(s)
+// 	for _, b := range str {
+// 		pair, ok := dic[b]
+// 		if ok {
+// 			if myList.Len() == 0 {
+// 				return false
+// 			}
+// 			e := myList.Back()
+// 			v := e.Value.(byte)
+// 			if pair != v {
+// 				return false
+// 			}
+// 			myList.Remove(e)
+// 		} else {
+// 			myList.PushBack(b)
+// 		}
+// 	}
+
+// 	if myList.Len() > 0 {
+// 		return false
+// 	}
+// 	return true
+// }

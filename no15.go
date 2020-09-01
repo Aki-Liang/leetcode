@@ -23,45 +23,34 @@ import "sort"
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 func threeSum(nums []int) [][]int {
-	//使用夹逼法
-	length := len(nums)
-	if 3 > length {
+	l := len(nums)
+	if l < 3 {
 		return nil
 	}
-	res := [][]int{}
 	sort.Ints(nums)
-	for i := 0; i < length; i++ {
+	res := [][]int{}
+	for i := 0; i < l; i++ {
 		if i > 0 && nums[i] == nums[i-1] {
-			//新元素和上一个元素相等时跳过
 			continue
 		}
 		m := i + 1
-		n := length - 1
+		n := l - 1
 		for m < n {
-			sum := nums[i] + nums[m] + nums[n]
-
-			if sum > 0 {
-				n = n - 1
-				continue
-			}
-
-			if sum < 0 {
-				m = m + 1
-				continue
-			}
-			if sum == 0 {
+			s := nums[i] + nums[m] + nums[n]
+			if s > 0 {
+				n--
+			} else if s < 0 {
+				m++
+			} else {
 				res = append(res, []int{nums[i], nums[m], nums[n]})
-				for n > m {
-					n -= 1
-					//尾部指针移动一步，如果相同则再移动一步
+				for m < n {
+					n--
 					if nums[n] != nums[n+1] {
 						break
 					}
 				}
-
-				for n > m {
-					m += 1
-					//头部指针移动一步，如果相同则再移动一步
+				for m < n {
+					m++
 					if nums[m] != nums[m-1] {
 						break
 					}
@@ -72,6 +61,57 @@ func threeSum(nums []int) [][]int {
 
 	return res
 }
+
+// func threeSum(nums []int) [][]int {
+// 	//使用夹逼法
+// 	length := len(nums)
+// 	if 3 > length {
+// 		return nil
+// 	}
+// 	res := [][]int{}
+// 	sort.Ints(nums)
+// 	for i := 0; i < length; i++ {
+// 		if i > 0 && nums[i] == nums[i-1] {
+// 			//新元素和上一个元素相等时跳过
+// 			continue
+// 		}
+// 		m := i + 1
+// 		n := length - 1
+// 		for m < n {
+// 			sum := nums[i] + nums[m] + nums[n]
+
+// 			if sum > 0 {
+// 				n = n - 1
+// 				continue
+// 			}
+
+// 			if sum < 0 {
+// 				m = m + 1
+// 				continue
+// 			}
+// 			if sum == 0 {
+// 				res = append(res, []int{nums[i], nums[m], nums[n]})
+// 				for n > m {
+// 					n -= 1
+// 					//尾部指针移动一步，如果相同则再移动一步
+// 					if nums[n] != nums[n+1] {
+// 						break
+// 					}
+// 				}
+
+// 				for n > m {
+// 					m += 1
+// 					//头部指针移动一步，如果相同则再移动一步
+// 					if nums[m] != nums[m-1] {
+// 						break
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+
+// 	return res
+// }
 
 // func threeSum(nums []int) [][]int {
 // 	length := len(nums)

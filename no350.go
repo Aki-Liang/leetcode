@@ -29,7 +29,6 @@ import "sort"
 // 来源：力扣（LeetCode）
 // 链接：https://leetcode-cn.com/problems/intersection-of-two-arrays-ii
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-
 func intersect(nums1 []int, nums2 []int) []int {
 	sort.Ints(nums1)
 	sort.Ints(nums2)
@@ -39,7 +38,7 @@ func intersect(nums1 []int, nums2 []int) []int {
 	res := []int{}
 	for i < len(nums1) && j < len(nums2) {
 		if nums1[i] == nums2[j] {
-			res = append(res, nums2[j])
+			res = append(res, nums1[i])
 			i++
 			j++
 		} else if nums1[i] > nums2[j] {
@@ -48,5 +47,27 @@ func intersect(nums1 []int, nums2 []int) []int {
 			i++
 		}
 	}
+
 	return res
 }
+
+// func intersect(nums1 []int, nums2 []int) []int {
+// 	sort.Ints(nums1)
+// 	sort.Ints(nums2)
+// 	i := 0
+// 	j := 0
+
+// 	res := []int{}
+// 	for i < len(nums1) && j < len(nums2) {
+// 		if nums1[i] == nums2[j] {
+// 			res = append(res, nums2[j])
+// 			i++
+// 			j++
+// 		} else if nums1[i] > nums2[j] {
+// 			j++
+// 		} else {
+// 			i++
+// 		}
+// 	}
+// 	return res
+// }

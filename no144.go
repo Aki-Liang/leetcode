@@ -34,12 +34,35 @@ package leetcode
 // }
 
 //前序 根-左-右
+
+//循环模式
 func preorderTraversal(root *TreeNode) []int {
 	if nil == root {
 		return nil
 	}
-	res := []int{root.Val}
-	res = append(res, preorderTraversal(root.Left)...)
-	res = append(res, preorderTraversal(root.Right)...)
+	res := []int{}
+	stack := []*TreeNode{root}
+	for len(stack) != 0 {
+		node := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		res = append(res, node.Val)
+		if node.Right != nil {
+			stack = append(stack, node.Right)
+		}
+		if node.Left != nil {
+			stack = append(stack, node.Left)
+		}
+	}
 	return res
 }
+
+// 递归法
+// func preorderTraversal(root *TreeNode) []int {
+// 	if nil == root {
+// 		return nil
+// 	}
+// 	res := []int{root.Val}
+// 	res = append(res, preorderTraversal(root.Left)...)
+// 	res = append(res, preorderTraversal(root.Right)...)
+// 	return res
+// }
