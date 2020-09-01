@@ -19,7 +19,7 @@ package leetcode
 // 链接：https://leetcode-cn.com/problems/is-unique-lcci
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 func isUnique(astr string) bool {
-	//因为ASCII字符128个，所以这边氛围高64位和低64位
+	//因为ASCII字符128个，所以这边分为高64位和低64位
 	var high uint64
 	var low uint64
 
