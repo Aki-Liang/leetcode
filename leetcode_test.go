@@ -133,3 +133,7 @@ func Test_rotate(t *testing.T) {
 func Test_isUnique(t *testing.T) {
 	fmt.Println(isUnique("abc"))
 }
+
+func Test_removeOuterParentheses(t *testing.T) {
+	removeOuterParentheses("(()())(())(()(()))")
+}
