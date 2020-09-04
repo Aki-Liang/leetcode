@@ -80,3 +80,21 @@ func removeOuterParentheses(S string) string {
 
 	return string(res)
 }
+
+// func removeOuterParentheses(S string) string {
+// 	res := []byte{}
+// 	level := 0
+// 	for i := 0; i < len(S); i++ {
+// 		if S[i] == '(' {
+// 			level++
+// 		}
+// 		if level > 1 {
+// 			res = append(res, S[i])
+// 		}
+// 		if S[i] == ')' {
+// 			level--
+// 		}
+// 	}
+
+// 	return string(res)
+// }

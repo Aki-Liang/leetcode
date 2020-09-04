@@ -32,6 +32,31 @@ package leetcode
 // x^{77} = x∗x^4∗x^8∗x^64
 // 1,4,8,64正好对应了 7777 的二进制表示 (1001101)中的每个 1
 
+// func myPow(x float64, n int) float64 {
+// 	if n > 0 {
+// 		return quickMul(x, n)
+// 	}
+// 	return 1.0 / quickMul(x, -n)
+// }
+
+// func quickMul(x float64, n int) float64 {
+// 	ans := 1.0
+// 	x_contribute := x
+// 	for n > 0 {
+// 		if n%2 == 1 {
+// 			//当前位为1
+// 			ans *= x_contribute
+// 		}
+
+// 		x_contribute *= x_contribute
+
+// 		//舍弃最低位
+// 		n = n / 2
+
+// 	}
+// 	return ans
+// }
+
 func myPow(x float64, n int) float64 {
 	if n > 0 {
 		return quickMul(x, n)
@@ -40,19 +65,16 @@ func myPow(x float64, n int) float64 {
 }
 
 func quickMul(x float64, n int) float64 {
+
 	ans := 1.0
 	x_contribute := x
 	for n > 0 {
 		if n%2 == 1 {
-			//当前位为1
 			ans *= x_contribute
 		}
-
 		x_contribute *= x_contribute
-
-		//舍弃最低位
 		n = n / 2
-
 	}
+
 	return ans
 }

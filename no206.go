@@ -14,23 +14,36 @@ package leetcode
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 // 递归法
+// func reverseList(head *ListNode) *ListNode {
+// 	if head == nil || head.Next == nil {
+// 		return head
+// 	}
+
+// 	p := reverseList(head.Next)
+// 	head.Next.Next = head
+// 	head.Next = nil
+
+// 	return p
+// }
+
+// // 循环法
+// func reverseListV2(head *ListNode) *ListNode {
+// 	var prev *ListNode
+// 	for head != nil {
+// 		head.Next, head, prev = prev, head.Next, head
+// 	}
+// 	return prev
+// }
+
 func reverseList(head *ListNode) *ListNode {
-	if head == nil || head.Next == nil {
-		return head
-	}
 
-	p := reverseList(head.Next)
-	head.Next.Next = head
-	head.Next = nil
-
-	return p
-}
-
-// 循环法
-func reverseListV2(head *ListNode) *ListNode {
 	var prev *ListNode
 	for head != nil {
-		head.Next, head, prev = prev, head.Next, head
+		tmp := head.Next
+		head.Next = prev
+		prev = head
+		head = tmp
 	}
+
 	return prev
 }

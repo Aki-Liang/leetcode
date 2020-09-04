@@ -27,56 +27,108 @@ import "container/heap"
 // 链接：https://leetcode-cn.com/problems/top-k-frequent-elements
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
-type Feq struct {
-	val int
-	cnt int
-}
-type FeqMinHeap []Feq
-
-func (pq *FeqMinHeap) Len() int {
-	return len(*pq)
-}
-func (pq *FeqMinHeap) Less(i, j int) bool {
-	return (*pq)[i].cnt < (*pq)[j].cnt
-}
-func (pq *FeqMinHeap) Swap(i, j int) {
-	(*pq)[i], (*pq)[j] = (*pq)[j], (*pq)[i]
+type HeapNode struct {
+	Val   int
+	Times int
 }
 
-func (pq *FeqMinHeap) Push(x interface{}) {
-	*pq = append(*pq, x.(Feq))
+type TopKHeap []*HeapNode
+
+func (a TopKHeap) Len() int           { return len(a) }
+func (a TopKHeap) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a TopKHeap) Less(i, j int) bool { return a[i].Times < a[j].Times }
+func (a *TopKHeap) Pop() interface{} {
+	item := (*a)[len(*a)-1]
+	*a = (*a)[:len(*a)-1]
+	return item
 }
 
-func (pq *FeqMinHeap) Pop() interface{} {
-	n := len(*pq) - 1
-	x := (*pq)[n]
-	*pq = (*pq)[:n]
-	return x
-}
-func (pq *FeqMinHeap) Peek() Feq {
-	return (*pq)[0]
+func (a *TopKHeap) Push(item interface{}) {
+	*a = append(*a, item.(*HeapNode))
 }
 
-func topKFrequentV2(nums []int, k int) []int {
-	cntMap := make(map[int]int)
-	for _, num := range nums {
-		cntMap[num]++
+func topKFrequent(nums []int, k int) []int {
+	countMap := make(map[int]int)
+	for _, n := range nums {
+		countMap[n] += 1
 	}
-	minHeap := &FeqMinHeap{}
-	for key, val := range cntMap {
-		heap.Push(minHeap, Feq{
-			val: key,
-			cnt: val,
-		})
-		if minHeap.Len() > k {
-			heap.Pop(minHeap)
+
+	size := 0
+	kHeap := TopKHeap{}
+	for val, times := range countMap {
+		node := &HeapNode{
+			Val:   val,
+			Times: times,
+		}
+		if size < k {
+
+			heap.Push(&kHeap, node)
+			size++
+		} else {
+			if times > kHeap[0].Times {
+				heap.Pop(&kHeap)
+				heap.Push(&kHeap, node)
+			}
 		}
 	}
-	res := make([]int, k)
-	i := 0
-	for minHeap.Len() > 0 {
-		res[i] = minHeap.Pop().(Feq).val
-		i++
+
+	res := []int{}
+	for _, node := range kHeap {
+		res = append(res, node.Val)
 	}
 	return res
 }
+
+// type Feq struct {
+// 	val int
+// 	cnt int
+// }
+// type FeqMinHeap []Feq
+
+// func (pq *FeqMinHeap) Len() int {
+// 	return len(*pq)
+// }
+// func (pq *FeqMinHeap) Less(i, j int) bool {
+// 	return (*pq)[i].cnt < (*pq)[j].cnt
+// }
+// func (pq *FeqMinHeap) Swap(i, j int) {
+// 	(*pq)[i], (*pq)[j] = (*pq)[j], (*pq)[i]
+// }
+
+// func (pq *FeqMinHeap) Push(x interface{}) {
+// 	*pq = append(*pq, x.(Feq))
+// }
+
+// func (pq *FeqMinHeap) Pop() interface{} {
+// 	n := len(*pq) - 1
+// 	x := (*pq)[n]
+// 	*pq = (*pq)[:n]
+// 	return x
+// }
+// func (pq *FeqMinHeap) Peek() Feq {
+// 	return (*pq)[0]
+// }
+
+// func topKFrequentV2(nums []int, k int) []int {
+// 	cntMap := make(map[int]int)
+// 	for _, num := range nums {
+// 		cntMap[num]++
+// 	}
+// 	minHeap := &FeqMinHeap{}
+// 	for key, val := range cntMap {
+// 		heap.Push(minHeap, Feq{
+// 			val: key,
+// 			cnt: val,
+// 		})
+// 		if minHeap.Len() > k {
+// 			heap.Pop(minHeap)
+// 		}
+// 	}
+// 	res := make([]int, k)
+// 	i := 0
+// 	for minHeap.Len() > 0 {
+// 		res[i] = minHeap.Pop().(Feq).val
+// 		i++
+// 	}
+// 	return res
+// }

@@ -1,7 +1,5 @@
 package leetcode
 
-import "container/list"
-
 // 给定一个 N 叉树，返回其节点值的前序遍历。
 
 // 例如，给定一个 3叉树
@@ -29,34 +27,53 @@ type Node struct {
 	Children []*Node
 }
 
-//暴力递归
 func preorder(root *Node) []int {
+	res := []int{}
 	if nil == root {
-		return nil
+		return res
 	}
-	res := []int{root.Val}
-	for _, node := range root.Children {
-		res = append(res, preorder(node)...)
+
+	stack := []*Node{root}
+	for len(stack) > 0 {
+		node := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		res = append(res, node.Val)
+		for i := len(node.Children) - 1; i >= 0; i-- {
+			stack = append(stack, node.Children[i])
+		}
 	}
+
 	return res
 }
 
-//栈
-func preorder_stack(root *Node) []int {
-	if nil == root {
-		return nil
-	}
-	res := []int{}
-	stack := list.New()
-	stack.PushBack(root)
-	for stack.Len() > 0 {
-		elem := stack.Back()
-		node := elem.Value.(*Node)
-		res = append(res, node.Val)
-		stack.Remove(elem)
-		for i := len(node.Children) - 1; i >= 0; i-- {
-			stack.PushBack(node.Children[i])
-		}
-	}
-	return res
-}
+// //暴力递归
+// func preorder(root *Node) []int {
+// 	if nil == root {
+// 		return nil
+// 	}
+// 	res := []int{root.Val}
+// 	for _, node := range root.Children {
+// 		res = append(res, preorder(node)...)
+// 	}
+// 	return res
+// }
+
+// //栈
+// func preorder_stack(root *Node) []int {
+// 	if nil == root {
+// 		return nil
+// 	}
+// 	res := []int{}
+// 	stack := list.New()
+// 	stack.PushBack(root)
+// 	for stack.Len() > 0 {
+// 		elem := stack.Back()
+// 		node := elem.Value.(*Node)
+// 		res = append(res, node.Val)
+// 		stack.Remove(elem)
+// 		for i := len(node.Children) - 1; i >= 0; i-- {
+// 			stack.PushBack(node.Children[i])
+// 		}
+// 	}
+// 	return res
+// }

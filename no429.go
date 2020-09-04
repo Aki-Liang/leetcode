@@ -1,7 +1,5 @@
 package leetcode
 
-import "container/list"
-
 // 给定一个 N 叉树，返回其节点值的层序遍历。 (即从左到右，逐层遍历)。
 
 // 例如，给定一个 3叉树 :
@@ -29,27 +27,51 @@ func levelOrder(root *Node) [][]int {
 	if nil == root {
 		return nil
 	}
-
 	res := [][]int{}
-	queue := list.New()
-	queue.PushBack(root)
-	for queue.Len() > 0 {
-		items := []int{}
-		l := queue.Len()
+	queue := []*Node{root}
+	for len(queue) > 0 {
+		l := len(queue)
+		level := []int{}
 		for i := 0; i < l; i++ {
-			elem := queue.Front()
-			node := elem.Value.(*Node)
-			items = append(items, node.Val)
-			queue.Remove(elem)
-			for _, item := range node.Children {
-				queue.PushBack(item)
+
+			node := queue[i]
+			level = append(level, node.Val)
+			for _, n := range node.Children {
+				queue = append(queue, n)
 			}
 		}
-		res = append(res, items)
+		queue = queue[l:]
+		res = append(res, level)
 	}
 
 	return res
 }
+
+// func levelOrder(root *Node) [][]int {
+// 	if nil == root {
+// 		return nil
+// 	}
+
+// 	res := [][]int{}
+// 	queue := list.New()
+// 	queue.PushBack(root)
+// 	for queue.Len() > 0 {
+// 		items := []int{}
+// 		l := queue.Len()
+// 		for i := 0; i < l; i++ {
+// 			elem := queue.Front()
+// 			node := elem.Value.(*Node)
+// 			items = append(items, node.Val)
+// 			queue.Remove(elem)
+// 			for _, item := range node.Children {
+// 				queue.PushBack(item)
+// 			}
+// 		}
+// 		res = append(res, items)
+// 	}
+
+// 	return res
+// }
 
 // func levelOrder(root *Node) [][]int {
 // 	if nil == root {
