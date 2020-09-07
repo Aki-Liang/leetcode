@@ -137,3 +137,6 @@ func Test_isUnique(t *testing.T) {
 func Test_removeOuterParentheses(t *testing.T) {
 	removeOuterParentheses("(()())(())(()(()))")
 }
+func Test_combine(t *testing.T) {
+	fmt.Println(combine(4, 2))
+}
