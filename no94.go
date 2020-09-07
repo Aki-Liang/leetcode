@@ -1,5 +1,7 @@
 package leetcode
 
+import "container/list"
+
 // 给定一个二叉树，返回它的中序 遍历。
 
 // 示例:
@@ -26,14 +28,32 @@ package leetcode
  *     Right *TreeNode
  * }
  */
+// func inorderTraversal(root *TreeNode) []int {
+// 	if nil == root {
+// 		return nil
+// 	}
+
+// 	res := []int{}
+// 	res = append(res, inorderTraversal(root.Left)...)
+// 	res = append(res, root.Val)
+// 	res = append(res, inorderTraversal(root.Right)...)
+// 	return res
+// }
+
 func inorderTraversal(root *TreeNode) []int {
-	if nil == root {
-		return nil
+	res := []int{}
+	stack := list.New()
+	for stack.Len() > 0 || nil != root {
+		for nil != root {
+			stack.PushBack(root)
+			root = root.Left
+		}
+		elem := stack.Back()
+		node := elem.Value.(*TreeNode)
+		res = append(res, node.Val)
+		stack.Remove(elem)
+		root = node.Right
 	}
 
-	res := []int{}
-	res = append(res, inorderTraversal(root.Left)...)
-	res = append(res, root.Val)
-	res = append(res, inorderTraversal(root.Right)...)
 	return res
 }
