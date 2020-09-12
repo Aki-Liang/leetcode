@@ -26,7 +26,6 @@ func getMax(a, b int) int {
 
 	return a
 }
-
 func maxArea(height []int) int {
 	length := len(height)
 
@@ -45,3 +44,30 @@ func maxArea(height []int) int {
 
 	return max
 }
+
+// func getMax(a, b int) int {
+// 	if a < b {
+// 		return b
+// 	}
+
+// 	return a
+// }
+
+// func maxArea(height []int) int {
+// 	length := len(height)
+
+// 	m := 0
+// 	n := length - 1
+// 	var max int
+// 	for m < n {
+// 		if height[m] < height[n] {
+// 			max = getMax(max, height[m]*(n-m))
+// 			m++
+// 		} else {
+// 			max = getMax(max, height[n]*(n-m))
+// 			n--
+// 		}
+// 	}
+
+// 	return max
+// }

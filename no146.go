@@ -30,108 +30,191 @@ package leetcode
 // 来源：力扣（LeetCode）
 // 链接：https://leetcode-cn.com/problems/lru-cache
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-
 type LRUCache struct {
-	size       int
-	capacity   int
-	cache      map[int]*DLinkedNode
-	head, tail *DLinkedNode
+	size     int
+	capacity int
+	index    map[int]*CacheNode
+	head     *CacheNode
+	tail     *CacheNode
 }
 
-type DLinkedNode struct {
+type CacheNode struct {
 	key   int
 	value int
-	prev  *DLinkedNode
-	next  *DLinkedNode
+	prev  *CacheNode
+	next  *CacheNode
 }
 
 func Constructor(capacity int) LRUCache {
-	cache := LRUCache{
-		size:     0,
-		capacity: capacity,
-		cache:    make(map[int]*DLinkedNode),
+	head := &CacheNode{}
+	tail := &CacheNode{
+		prev: head,
 	}
-
-	head := &DLinkedNode{}
-	tail := &DLinkedNode{}
-	tail.prev = head
 	head.next = tail
-	cache.head = head
-	cache.tail = tail
-
-	return cache
+	c := LRUCache{
+		capacity: capacity,
+		head:     head,
+		tail:     tail,
+		index:    make(map[int]*CacheNode),
+	}
+	return c
 }
 
 func (this *LRUCache) Get(key int) int {
-	node, ok := this.cache[key]
-	if ok {
-		this.move2Head(node)
-		return node.value
+	node, ok := this.index[key]
+	if !ok {
+		return -1
 	}
-
-	return -1
+	this.move2Head(node)
+	return node.value
 }
 
 func (this *LRUCache) Put(key int, value int) {
-	node, ok := this.cache[key]
-	if ok {
+	node, ok := this.index[key]
+	if !ok {
+		//add
+		node := &CacheNode{
+			key:   key,
+			value: value,
+		}
+		this.index[key] = node
+		this.add2Head(node)
+		this.size++
+		if this.size > this.capacity {
+			this.removeTail()
+		}
+	} else {
 		node.value = value
 		this.move2Head(node)
-		return
-	}
-
-	newNode := &DLinkedNode{
-		key:   key,
-		value: value,
-	}
-
-	this.cache[key] = newNode
-	this.add2Head(newNode)
-	this.size++
-	if this.size > this.capacity {
-		this.removeTail()
-
 	}
 
 }
 
-func (this *LRUCache) removeTail() {
-	if this.tail.prev == this.head {
-		return
-	}
-	delete(this.cache, this.tail.prev.key)
-	this.removeNode(this.tail.prev)
-
-}
-
-func (this *LRUCache) move2Head(node *DLinkedNode) {
-	if nil == node {
-		return
-	}
-
+func (this *LRUCache) move2Head(node *CacheNode) {
 	this.removeNode(node)
 	this.add2Head(node)
 }
 
-func (this *LRUCache) removeNode(node *DLinkedNode) {
-	if nil == node {
-		return
-	}
-
-	node.prev.next = node.next
-	node.next.prev = node.prev
-}
-
-func (this *LRUCache) add2Head(node *DLinkedNode) {
-	if nil == node {
-		return
-	}
-
+func (this *LRUCache) add2Head(node *CacheNode) {
 	node.next = this.head.next
+	node.prev = this.head
 	node.next.prev = node
 	this.head.next = node
-	node.prev = this.head
 }
+
+func (this *LRUCache) removeNode(node *CacheNode) {
+	node.next.prev = node.prev
+	node.prev.next = node.next
+}
+
+func (this *LRUCache) removeTail() {
+	last := this.tail.prev
+	this.removeNode(last)
+	delete(this.index, last.key)
+	this.size--
+}
+
+// type LRUCache struct {
+// 	size       int
+// 	capacity   int
+// 	cache      map[int]*DLinkedNode
+// 	head, tail *DLinkedNode
+// }
+
+// type DLinkedNode struct {
+// 	key   int
+// 	value int
+// 	prev  *DLinkedNode
+// 	next  *DLinkedNode
+// }
+
+// func Constructor(capacity int) LRUCache {
+// 	cache := LRUCache{
+// 		size:     0,
+// 		capacity: capacity,
+// 		cache:    make(map[int]*DLinkedNode),
+// 	}
+
+// 	head := &DLinkedNode{}
+// 	tail := &DLinkedNode{}
+// 	tail.prev = head
+// 	head.next = tail
+// 	cache.head = head
+// 	cache.tail = tail
+
+// 	return cache
+// }
+
+// func (this *LRUCache) Get(key int) int {
+// 	node, ok := this.cache[key]
+// 	if ok {
+// 		this.move2Head(node)
+// 		return node.value
+// 	}
+
+// 	return -1
+// }
+
+// func (this *LRUCache) Put(key int, value int) {
+// 	node, ok := this.cache[key]
+// 	if ok {
+// 		node.value = value
+// 		this.move2Head(node)
+// 		return
+// 	}
+
+// 	newNode := &DLinkedNode{
+// 		key:   key,
+// 		value: value,
+// 	}
+
+// 	this.cache[key] = newNode
+// 	this.add2Head(newNode)
+// 	this.size++
+// 	if this.size > this.capacity {
+// 		this.removeTail()
+
+// 	}
+
+// }
+
+// func (this *LRUCache) removeTail() {
+// 	if this.tail.prev == this.head {
+// 		return
+// 	}
+// 	delete(this.cache, this.tail.prev.key)
+// 	this.removeNode(this.tail.prev)
+
+// }
+
+// func (this *LRUCache) move2Head(node *DLinkedNode) {
+// 	if nil == node {
+// 		return
+// 	}
+
+// 	this.removeNode(node)
+// 	this.add2Head(node)
+// }
+
+// func (this *LRUCache) removeNode(node *DLinkedNode) {
+// 	if nil == node {
+// 		return
+// 	}
+
+// 	node.prev.next = node.next
+// 	node.next.prev = node.prev
+// }
+
+// func (this *LRUCache) add2Head(node *DLinkedNode) {
+// 	if nil == node {
+// 		return
+// 	}
+
+// 	node.next = this.head.next
+// 	node.next.prev = node
+// 	this.head.next = node
+// 	node.prev = this.head
+// }
 
 /**
  * Your LRUCache object will be instantiated and called as such:

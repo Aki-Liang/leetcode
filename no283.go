@@ -12,7 +12,6 @@ import "fmt"
 // 来源：力扣（LeetCode）
 // 链接：https://leetcode-cn.com/problems/move-zeroes
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-
 func moveZeroes(nums []int) {
 	i := 0
 	for j := 0; j < len(nums); j++ {
@@ -27,18 +26,32 @@ func moveZeroes(nums []int) {
 	fmt.Println(nums)
 }
 
-func moveZeroeV2(nums []int) {
-	for i := 0; i < len(nums); i++ {
-		if 0 != nums[i] {
-			continue
-		}
-		for j := i + 1; j < len(nums); j++ {
-			if 0 != nums[j] {
-				nums[j], nums[i] = nums[i], nums[j]
-				break
-			}
-		}
-	}
+// func moveZeroes(nums []int) {
+// 	i := 0
+// 	for j := 0; j < len(nums); j++ {
+// 		if 0 != nums[j] {
+// 			nums[i] = nums[j]
+// 			if j > i {
+// 				nums[j] = 0
+// 			}
+// 			i++
+// 		}
+// 	}
+// 	fmt.Println(nums)
+// }
 
-	fmt.Println(nums)
-}
+// func moveZeroeV2(nums []int) {
+// 	for i := 0; i < len(nums); i++ {
+// 		if 0 != nums[i] {
+// 			continue
+// 		}
+// 		for j := i + 1; j < len(nums); j++ {
+// 			if 0 != nums[j] {
+// 				nums[j], nums[i] = nums[i], nums[j]
+// 				break
+// 			}
+// 		}
+// 	}
+
+// 	fmt.Println(nums)
+// }

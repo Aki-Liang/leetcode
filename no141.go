@@ -14,25 +14,41 @@ type ListNode struct {
 }
 
 func hasCycle(head *ListNode) bool {
-	if nil == head || nil == head.Next {
+	if nil == head {
 		return false
 	}
-	pFast := head.Next
-	pSlow := head
-	for {
-		if pFast == pSlow {
+	walker := head
+	runner := head
+	for nil != runner.Next && nil != runner.Next.Next {
+		walker = walker.Next
+		runner = runner.Next.Next
+		if walker == runner {
 			return true
 		}
-
-		if nil == pSlow.Next {
-			return false
-		}
-		pSlow = pSlow.Next
-
-		if nil == pFast.Next || nil == pFast.Next.Next {
-			return false
-		}
-		pFast = pFast.Next.Next
 	}
-
+	return false
 }
+
+// func hasCycle(head *ListNode) bool {
+// 	if nil == head || nil == head.Next {
+// 		return false
+// 	}
+// 	pFast := head.Next
+// 	pSlow := head
+// 	for {
+// 		if pFast == pSlow {
+// 			return true
+// 		}
+
+// 		if nil == pSlow.Next {
+// 			return false
+// 		}
+// 		pSlow = pSlow.Next
+
+// 		if nil == pFast.Next || nil == pFast.Next.Next {
+// 			return false
+// 		}
+// 		pFast = pFast.Next.Next
+// 	}
+
+// }
