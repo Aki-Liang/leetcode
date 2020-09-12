@@ -29,14 +29,13 @@ func rotate(nums []int, k int) {
 	k = k % length
 	count := 0
 	for i := 0; count < length; i++ {
+		idx := i
 		prev := nums[i]
-		current := i
 		for {
-			next := (current + k) % length
-			prev, nums[next] = nums[next], prev
+			idx = (idx + k) % length
+			prev, nums[idx] = nums[idx], prev
 			count++
-			current = next
-			if current == i {
+			if idx == i {
 				break
 			}
 		}
@@ -44,3 +43,24 @@ func rotate(nums []int, k int) {
 
 	fmt.Println(nums)
 }
+
+// func rotate(nums []int, k int) {
+// 	length := len(nums)
+// 	k = k % length
+// 	count := 0
+// 	for i := 0; count < length; i++ {
+// 		prev := nums[i]
+// 		current := i
+// 		for {
+// 			next := (current + k) % length
+// 			prev, nums[next] = nums[next], prev
+// 			count++
+// 			current = next
+// 			if current == i {
+// 				break
+// 			}
+// 		}
+// 	}
+
+// 	fmt.Println(nums)
+// }

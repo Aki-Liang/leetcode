@@ -31,24 +31,47 @@ package leetcode
  *     Next *ListNode
  * }
  */
+
 func reverseKGroup(head *ListNode, k int) *ListNode {
 	curr := head
 	count := 0
-	for curr != nil && count != k { // find the k+1 node
+	//找到k+1个节点
+	for curr != nil && count != k {
 		curr = curr.Next
 		count++
 	}
-	if count == k { // if k+1 node is found
-		curr = reverseKGroup(curr, k) // reverse list with k+1 node as head
-		// head - head-pointer to direct part,
-		// curr - head-pointer to reversed part;
-		for ; count > 0; count-- { // reverse current k-group:
-			tmp := head.Next // tmp - next head in direct part
-			head.Next = curr // preappcurring "direct" head to the reversed list
-			curr = head      // move head of reversed part to a new node
-			head = tmp       // move "direct" head to the next node in direct part
+	if count == k { //有k+1个节点
+		curr = reverseKGroup(curr, k) //递归换后面的
+		for ; count > 0; count-- {
+			tmp := head.Next
+			head.Next = curr
+			curr = head
+			head = tmp
 		}
 		head = curr
 	}
+
 	return head
 }
+
+// func reverseKGroup(head *ListNode, k int) *ListNode {
+// 	curr := head
+// 	count := 0
+// 	for curr != nil && count != k { // find the k+1 node
+// 		curr = curr.Next
+// 		count++
+// 	}
+// 	if count == k { // if k+1 node is found
+// 		curr = reverseKGroup(curr, k) // reverse list with k+1 node as head
+// 		// head - head-pointer to direct part,
+// 		// curr - head-pointer to reversed part;
+// 		for ; count > 0; count-- { // reverse current k-group:
+// 			tmp := head.Next // tmp - next head in direct part
+// 			head.Next = curr // preappcurring "direct" head to the reversed list
+// 			curr = head      // move head of reversed part to a new node
+// 			head = tmp       // move "direct" head to the next node in direct part
+// 		}
+// 		head = curr
+// 	}
+// 	return head
+// }

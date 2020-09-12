@@ -36,17 +36,29 @@ package leetcode
 // }
 
 func swapPairs(head *ListNode) *ListNode {
-	pre := &ListNode{
-		Next: head,
+	pre := head
+	next := head.Next
+	for next != nil && next.Next != nil {
+		pre.Next = next.Next
+		next.Next = pre
+
 	}
-	tmp := pre
-	for nil != tmp.Next && nil != tmp.Next.Next {
-		first := tmp.Next
-		second := tmp.Next.Next
-		tmp.Next = second
-		first.Next = second.Next
-		second.Next = first
-		tmp = first
-	}
-	return pre.Next
+
+	return next
 }
+
+// func swapPairs(head *ListNode) *ListNode {
+// 	pre := &ListNode{
+// 		Next: head,
+// 	}
+// 	tmp := pre
+// 	for nil != tmp.Next && nil != tmp.Next.Next {
+// 		first := tmp.Next
+// 		second := tmp.Next.Next
+// 		tmp.Next = second
+// 		first.Next = second.Next
+// 		second.Next = first
+// 		tmp = first
+// 	}
+// 	return pre.Next
+// }
