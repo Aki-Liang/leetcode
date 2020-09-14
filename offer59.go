@@ -37,27 +37,25 @@ func maxSlidingWindow(nums []int, k int) []int {
 	if len(nums) == 0 || k == 0 {
 		return res
 	}
-	//填充滑动窗口
-	queue := []int{}
+	dequeue := []int{}
 	for i := 0; i < k; i++ {
-		for len(queue) > 0 && queue[len(queue)-1] < nums[i] {
-			queue = queue[:len(queue)-1]
+		for len(dequeue) > 0 && dequeue[len(dequeue)-1] < nums[i] {
+			dequeue = dequeue[:len(dequeue)-1]
 		}
-		queue = append(queue, nums[i])
+		dequeue = append(dequeue, nums[i])
 	}
-	res = append(res, queue[0])
-
+	res = append(res, dequeue[0])
 	for i := k; i < len(nums); i++ {
-		if nums[i-k] == queue[0] {
-			queue = queue[1:]
+		if nums[i-k] == dequeue[0] {
+			dequeue = dequeue[1:]
 		}
-		for len(queue) > 0 && queue[len(queue)-1] < nums[i] {
-			queue = queue[:len(queue)-1]
+		for len(dequeue) != 0 && dequeue[len(dequeue)-1] < nums[i] {
+			dequeue = dequeue[:len(dequeue)-1]
 		}
-		queue = append(queue, nums[i])
-		res = append(res, queue[0])
-	}
+		dequeue = append(dequeue, nums[i])
 
+		res = append(res, dequeue[0])
+	}
 	return res
 }
 

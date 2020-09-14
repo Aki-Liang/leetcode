@@ -36,8 +36,8 @@ package leetcode
  * }
  */
 func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
-	if root == nil || p == nil || q == nil {
-		return nil
+	if nil == root || nil == p || nil == q {
+		return root
 	}
 
 	if root == p || root == q {
@@ -46,12 +46,35 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 
 	right := lowestCommonAncestor(root.Right, p, q)
 	left := lowestCommonAncestor(root.Left, p, q)
-	if right != nil && left != nil {
+	if nil != right && nil != left {
 		return root
 	}
-	if right == nil {
+
+	if nil == right {
 		return left
 	}
 
 	return right
+
 }
+
+// func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+// 	if root == nil || p == nil || q == nil {
+// 		return nil
+// 	}
+
+// 	if root == p || root == q {
+// 		return root
+// 	}
+
+// 	right := lowestCommonAncestor(root.Right, p, q)
+// 	left := lowestCommonAncestor(root.Left, p, q)
+// 	if right != nil && left != nil {
+// 		return root
+// 	}
+// 	if right == nil {
+// 		return left
+// 	}
+
+// 	return right
+// }

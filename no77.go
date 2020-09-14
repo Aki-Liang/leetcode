@@ -18,28 +18,53 @@ package leetcode
 // 来源：力扣（LeetCode）
 // 链接：https://leetcode-cn.com/problems/combinations
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-
 func combine(n int, k int) [][]int {
 	res := [][]int{}
-	if n <= 0 || k <= 0 || n < k {
+	if n == 0 || k == 0 || n < k {
 		return res
 	}
-	nums := []int{}
-	trackBackCombine(n, 1, k, nums, &res)
+	trackBackCombine(n, 1, k, []int{}, &res) //从1开始
 	return res
 }
 
 func trackBackCombine(n, m, k int, nums []int, res *[][]int) {
+	//先写达成条件
 	if len(nums) == k {
-		tmp := make([]int, k)
+		//一个组合完成
+		tmp := make([]int, len(nums))
 		copy(tmp, nums)
 		*res = append(*res, tmp)
-		return
 	}
 
 	for ; m <= n; m++ {
 		nums = append(nums, m)
-		trackBackCombine(n, m+1, k, nums, res)
-		nums = nums[:len(nums)-1]
+		trackBackCombine(n, m+1, k, nums, res) //拼下一个
+		nums = nums[:len(nums)-1]              //还原
 	}
+
 }
+
+// func combine(n int, k int) [][]int {
+// 	res := [][]int{}
+// 	if n <= 0 || k <= 0 || n < k {
+// 		return res
+// 	}
+// 	nums := []int{}
+// 	trackBackCombine(n, 1, k, nums, &res)
+// 	return res
+// }
+
+// func trackBackCombine(n, m, k int, nums []int, res *[][]int) {
+// 	if len(nums) == k {
+// 		tmp := make([]int, k)
+// 		copy(tmp, nums)
+// 		*res = append(*res, tmp)
+// 		return
+// 	}
+
+// 	for ; m <= n; m++ {
+// 		nums = append(nums, m)
+// 		trackBackCombine(n, m+1, k, nums, res)
+// 		nums = nums[:len(nums)-1]
+// 	}
+// }

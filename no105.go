@@ -28,23 +28,47 @@ package leetcode
  *     Right *TreeNode
  * }
  */
+
 func buildTree(preorder []int, inorder []int) *TreeNode {
-	if len(preorder) != len(inorder) || len(preorder) == 0 {
+	if len(preorder) == 0 || len(inorder) == 0 {
 		return nil
 	}
 
-	root := &TreeNode{
-		Val: preorder[0],
-	}
-	//找到中序遍历的跟节点
+	//找到中序的根节点
 	i := 0
 	for ; i < len(inorder); i++ {
 		if inorder[i] == preorder[0] {
 			break
 		}
 	}
-	root.Right = buildTree(preorder[len(inorder[:i])+1:], inorder[i+1:])
-	root.Left = buildTree(preorder[1:len(inorder[:i])+1], inorder[:i])
 
+	left := buildTree(preorder[1:len(inorder[:i])+1], inorder[:i])
+	right := buildTree(preorder[len(inorder[:i])+1:], inorder[i+1:])
+	root := &TreeNode{
+		Val:   preorder[0],
+		Left:  left,
+		Right: right,
+	}
 	return root
 }
+
+// func buildTree(preorder []int, inorder []int) *TreeNode {
+// 	if len(preorder) != len(inorder) || len(preorder) == 0 {
+// 		return nil
+// 	}
+
+// 	root := &TreeNode{
+// 		Val: preorder[0],
+// 	}
+// 	//找到中序遍历的跟节点
+// 	i := 0
+// 	for ; i < len(inorder); i++ {
+// 		if inorder[i] == preorder[0] {
+// 			break
+// 		}
+// 	}
+// 	root.Right = buildTree(preorder[len(inorder[:i])+1:], inorder[i+1:])
+// 	root.Left = buildTree(preorder[1:len(inorder[:i])+1], inorder[:i])
+
+// 	return root
+// }

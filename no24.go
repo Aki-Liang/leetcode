@@ -35,18 +35,48 @@ package leetcode
 
 // }
 
+//递归解法
+// func swapPairs(head *ListNode) *ListNode {
+// 	if head == nil || head.Next == nil {
+// 		return head
+// 	}
+
+// 	first := head
+// 	second := head.Next
+
+// 	first.Next = swapPairs(second.Next)
+// 	second.Next = first
+// 	return second
+// }
+
+// 循环解法
 func swapPairs(head *ListNode) *ListNode {
-	pre := &ListNode{
+	hair := &ListNode{
 		Next: head,
 	}
-	tmp := pre
-	for nil != tmp.Next && nil != tmp.Next.Next {
-		first := tmp.Next
-		second := tmp.Next.Next
-		tmp.Next = second
-		first.Next = second.Next
-		second.Next = first
-		tmp = first
+	curr := hair
+	for curr.Next != nil && curr.Next.Next != nil {
+		tmp := curr.Next.Next
+		tmp.Next, curr.Next.Next = curr.Next, tmp.Next
+		curr.Next = tmp
+		curr = curr.Next.Next
 	}
-	return pre.Next
+
+	return hair.Next
 }
+
+// func swapPairs(head *ListNode) *ListNode {
+// 	pre := &ListNode{
+// 		Next: head,
+// 	}
+// 	tmp := pre
+// 	for nil != tmp.Next && nil != tmp.Next.Next {
+// 		first := tmp.Next
+// 		second := tmp.Next.Next
+// 		tmp.Next = second
+// 		first.Next = second.Next
+// 		second.Next = first
+// 		tmp = first
+// 	}
+// 	return pre.Next
+// }

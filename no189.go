@@ -23,26 +23,48 @@ import "fmt"
 // 来源：力扣（LeetCode）
 // 链接：https://leetcode-cn.com/problems/rotate-array
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
 func rotate(nums []int, k int) {
 	l := len(nums)
 	k = k % l
+	count := 0
 
-	count := 0 //移动到位需要每个元素移动一次，所以这里记录元素移动次数
-	// prev := 0  //记录前一个被占位的元素
 	for i := 0; count < l; i++ {
-		curr := nums[i] //当前要挪走的元素
-		index := i
+		prev := nums[i]
+		curr := i
 		for {
-			index = (index + k) % len(nums) //目的位置的下标
-			curr, nums[index] = nums[index], curr
+			curr = (curr + k) % l
+			prev, nums[curr] = nums[curr], prev
 			count++
-			if index == i { //表示已经全部交换完毕
+			if curr == i {
 				break
 			}
 		}
 	}
+
 	fmt.Println(nums)
 }
+
+// func rotate(nums []int, k int) {
+// 	l := len(nums)
+// 	k = k % l
+
+// 	count := 0 //移动到位需要每个元素移动一次，所以这里记录元素移动次数
+// 	// prev := 0  //记录前一个被占位的元素
+// 	for i := 0; count < l; i++ {
+// 		curr := nums[i] //当前要挪走的元素
+// 		index := i
+// 		for {
+// 			index = (index + k) % len(nums) //目的位置的下标
+// 			curr, nums[index] = nums[index], curr
+// 			count++
+// 			if index == i { //表示已经全部交换完毕
+// 				break
+// 			}
+// 		}
+// 	}
+// 	fmt.Println(nums)
+// }
 
 // func rotate(nums []int, k int) {
 // 	l := len(nums)
