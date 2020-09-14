@@ -32,27 +32,24 @@ package leetcode
  * }
  */
 
-//递归法
 func reverseKGroup(head *ListNode, k int) *ListNode {
 	curr := head
 	count := 0
-	//先找到k+1个
-	for curr != nil {
+	//找到k+1个节点
+	for curr != nil && count != k {
 		curr = curr.Next
 		count++
 		if count == k {
 			break
 		}
 	}
-
-	if count == k {
-		curr = reverseKGroup(curr, k)
-		for count > 0 {
+	if count == k { //有k+1个节点
+		curr = reverseKGroup(curr, k) //递归换后面的
+		for ; count > 0; count-- {
 			tmp := head.Next
 			head.Next = curr
 			curr = head
 			head = tmp
-			count--
 		}
 		head = curr
 	}

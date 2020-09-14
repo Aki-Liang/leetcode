@@ -51,18 +51,15 @@ package leetcode
 
 // 循环解法
 func swapPairs(head *ListNode) *ListNode {
-	hair := &ListNode{
-		Next: head,
-	}
-	curr := hair
-	for curr.Next != nil && curr.Next.Next != nil {
-		tmp := curr.Next.Next
-		tmp.Next, curr.Next.Next = curr.Next, tmp.Next
-		curr.Next = tmp
-		curr = curr.Next.Next
+	pre := head
+	next := head.Next
+	for next != nil && next.Next != nil {
+		pre.Next = next.Next
+		next.Next = pre
+
 	}
 
-	return hair.Next
+	return next
 }
 
 // func swapPairs(head *ListNode) *ListNode {

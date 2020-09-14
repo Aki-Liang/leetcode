@@ -11,39 +11,39 @@ package leetcode
 
 // 来源：力扣（LeetCode）
 // 链接：https://leetcode-cn.com/problems/reverse-linked-list
-// 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+// 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。\\
 
-// 递归法
+/**
+ * Definition for singly-linked list.
+ * type ListNode struct {
+ *     Val int
+ *     Next *ListNode
+ * }
+ */
+func reverseList(head *ListNode) *ListNode {
+	if head == nil || head.Next == nil {
+		return head
+	}
+
+	p := reverseList(head.Next)
+	head.Next.Next = head
+	head.Next = nil
+	return p
+}
+
 // func reverseList(head *ListNode) *ListNode {
-// 	if head == nil || head.Next == nil {
+// 	if head == nil ||head.Next == nil {
 // 		return head
 // 	}
 
-// 	p := reverseList(head.Next)
-// 	head.Next.Next = head
-// 	head.Next = nil
-
-// 	return p
-// }
-
-// // 循环法
-// func reverseListV2(head *ListNode) *ListNode {
 // 	var prev *ListNode
-// 	for head != nil {
-// 		head.Next, head, prev = prev, head.Next, head
+// 	curr := head
+// 	for curr != nil {
+// 		tmp := curr.Next
+// 		curr.Next = prev
+// 		prev = curr
+// 		curr = tmp
 // 	}
+
 // 	return prev
 // }
-
-func reverseList(head *ListNode) *ListNode {
-
-	var prev *ListNode
-	for head != nil {
-		tmp := head.Next
-		head.Next = prev
-		prev = head
-		head = tmp
-	}
-
-	return prev
-}

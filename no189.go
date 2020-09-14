@@ -25,18 +25,17 @@ import "fmt"
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 func rotate(nums []int, k int) {
-	l := len(nums)
-	k = k % l
+	length := len(nums)
+	k = k % length
 	count := 0
-
-	for i := 0; count < l; i++ {
+	for i := 0; count < length; i++ {
+		idx := i
 		prev := nums[i]
-		curr := i
 		for {
-			curr = (curr + k) % l
-			prev, nums[curr] = nums[curr], prev
+			idx = (idx + k) % length
+			prev, nums[idx] = nums[idx], prev
 			count++
-			if curr == i {
+			if idx == i {
 				break
 			}
 		}
@@ -44,46 +43,6 @@ func rotate(nums []int, k int) {
 
 	fmt.Println(nums)
 }
-
-// func rotate(nums []int, k int) {
-// 	l := len(nums)
-// 	k = k % l
-
-// 	count := 0 //移动到位需要每个元素移动一次，所以这里记录元素移动次数
-// 	// prev := 0  //记录前一个被占位的元素
-// 	for i := 0; count < l; i++ {
-// 		curr := nums[i] //当前要挪走的元素
-// 		index := i
-// 		for {
-// 			index = (index + k) % len(nums) //目的位置的下标
-// 			curr, nums[index] = nums[index], curr
-// 			count++
-// 			if index == i { //表示已经全部交换完毕
-// 				break
-// 			}
-// 		}
-// 	}
-// 	fmt.Println(nums)
-// }
-
-// func rotate(nums []int, k int) {
-// 	l := len(nums)
-// 	k = k % l
-// 	count := 0
-// 	for i := 0; count < l; i++ {
-// 		idx := i
-// 		next := nums[idx]
-// 		for {
-// 			idx = (idx + k) % len(nums)
-// 			nums[idx], next = next, nums[idx]
-// 			count++
-// 			if idx == i {
-// 				break
-// 			}
-// 		}
-// 	}
-// 	fmt.Println(nums)
-// }
 
 // func rotate(nums []int, k int) {
 // 	length := len(nums)
