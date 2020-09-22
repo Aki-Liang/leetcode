@@ -140,3 +140,15 @@ func Test_removeOuterParentheses(t *testing.T) {
 func Test_combine(t *testing.T) {
 	fmt.Println(combine(4, 2))
 }
+
+func Test_search(t *testing.T) {
+	fmt.Println(search([]int{3, 1}, 1))
+}
+
+func Test_findLadders(t *testing.T) {
+	fmt.Println(findLadders("hit", "cog", []string{"hot", "dot", "dog", "lot", "log", "cog"}))
+}
+
+func Test_combinationSum2(t *testing.T) {
+	fmt.Println(combinationSum2([]int{2, 2, 2}, 2))
+}
