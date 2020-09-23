@@ -152,3 +152,7 @@ func Test_findLadders(t *testing.T) {
 func Test_combinationSum2(t *testing.T) {
 	fmt.Println(combinationSum2([]int{2, 2, 2}, 2))
 }
+
+func Test_4sum(t *testing.T) {
+	fmt.Println(fourSum([]int{5, 5, 3, 5, 1, -5, 1, -2}, 4))
+}
