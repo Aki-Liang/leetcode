@@ -25,7 +25,7 @@ package leetcode
 
 // 动态规划法
 // dp中存储译码方法数量，dp[i]存储str[0...i]的方法总数
-//s[i]==0, if s[i-1]==1 || s[i-1]==2, 则dp[i]=dp[i-2],否则return 0
+// s[i]==0, if s[i-1]==1 || s[i-1]==2, 则dp[i]=dp[i-2],否则return 0
 // s[i-1]==1, dp[i] = dp[i-1]+dp[i-2]
 // s[i-1]==2 && 1<=s[i]<=6, dp[i] = dp[i-1]+dp[i-2]
 
