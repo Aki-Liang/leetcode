@@ -156,3 +156,15 @@ func Test_combinationSum2(t *testing.T) {
 func Test_4sum(t *testing.T) {
 	fmt.Println(fourSum([]int{5, 5, 3, 5, 1, -5, 1, -2}, 4))
 }
+
+func Test_longestValidParentheses(t *testing.T) {
+	fmt.Println(longestValidParentheses("(()"))
+}
+
+func Test_minPathSum(t *testing.T) {
+	fmt.Println(minPathSum([][]int{{1, 3, 1}, {1, 5, 1}, {4, 2, 1}}))
+}
+
+func Test_numDecodings(t *testing.T) {
+	fmt.Println(numDecodings("1210121"))
+}
