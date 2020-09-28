@@ -168,3 +168,7 @@ func Test_minPathSum(t *testing.T) {
 func Test_numDecodings(t *testing.T) {
 	fmt.Println(numDecodings("1210121"))
 }
+
+func Test_maxCoins(t *testing.T) {
+	fmt.Println(maxCoins([]int{3, 1, 5, 8}))
+}

@@ -35,25 +35,49 @@ func minPathSum(grid [][]int) int {
 	if len(grid) == 0 || len(grid[0]) == 0 {
 		return 0
 	}
-
-	rows, columns := len(grid), len(grid[0])
-	dp := make([]int, columns)
-	for m := 0; m < rows; m++ {
-		for n := 0; n < columns; n++ {
-			if n-1 >= 0 && m-1 >= 0 {
-				dp[n] = min(dp[n-1], dp[n]) + grid[m][n]
-			} else if n-1 >= 0 && m == 0 {
-				dp[n] = dp[n-1] + grid[m][n]
-			} else if n == 0 && m-1 >= 0 {
-				dp[n] = dp[n] + grid[m][n]
+	dp := make([]int, len(grid[0]))
+	dp[0] = grid[0][0]
+	for i := 0; i < len(grid[0]); i++ {
+		if i > 0 {
+			dp[i] = grid[0][i] + dp[i-1]
+		}
+	}
+	for i := 1; i < len(grid); i++ {
+		for j := 0; j < len(grid[i]); j++ {
+			if j > 0 {
+				dp[j] = min(dp[j], dp[j-1]) + grid[i][j]
 			} else {
-				dp[n] = grid[m][n]
+				dp[j] = dp[j] + grid[i][j]
 			}
 		}
 	}
 
-	return dp[columns-1]
+	return dp[len(dp)-1]
 }
+
+// func minPathSum(grid [][]int) int {
+// 	if len(grid) == 0 || len(grid[0]) == 0 {
+// 		return 0
+// 	}
+
+// 	rows, columns := len(grid), len(grid[0])
+// 	dp := make([]int, columns)
+// 	for m := 0; m < rows; m++ {
+// 		for n := 0; n < columns; n++ {
+// 			if n-1 >= 0 && m-1 >= 0 {
+// 				dp[n] = min(dp[n-1], dp[n]) + grid[m][n]
+// 			} else if n-1 >= 0 && m == 0 {
+// 				dp[n] = dp[n-1] + grid[m][n]
+// 			} else if n == 0 && m-1 >= 0 {
+// 				dp[n] = dp[n] + grid[m][n]
+// 			} else {
+// 				dp[n] = grid[m][n]
+// 			}
+// 		}
+// 	}
+
+// 	return dp[columns-1]
+// }
 
 func min(a, b int) int {
 	if a < b {
