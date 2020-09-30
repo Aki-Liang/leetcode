@@ -44,6 +44,39 @@ import "math"
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 func minMutation(start string, end string, bank []string) int {
+	possible := []string{"A", "C", "G", "T"}
+	stepMap := make(map[string]int)
+	for _, w := range bank {
+		stepMap[w] = math.MaxInt32
+	}
+	queue := []string{start}
+	stepMap[start] = 0i
+	for len(queue) > 0 {
+		newQ := []string{}
+		n := len(queue)
+		for i := 0; i < n; i++ {
+			w := queue[i]
+			if w == end {
+				return stepMap[w]
+			}
+			step, _ := stepMap[w]
+			for i := 0; i < len(w); i++ {
+				for _, p := range possible {
+					tmp := w[:i] + p + w[i+1:]
+					tmpStep, ok := stepMap[tmp]
+					if ok && step+1 <= tmpStep {
+						newQ = append(newQ, tmp)
+						stepMap[tmp] = step + 1
+					}
+				}
+			}
+		}
+		queue = newQ
+	}
+	return -1
+}
+
+func minMutationV2(start string, end string, bank []string) int {
 	res := -1
 	wdict := map[string]int{}
 	for idx, word := range bank {
