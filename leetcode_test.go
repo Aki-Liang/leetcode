@@ -172,3 +172,7 @@ func Test_numDecodings(t *testing.T) {
 func Test_maxCoins(t *testing.T) {
 	fmt.Println(maxCoins([]int{3, 1, 5, 8}))
 }
+
+func Test_leastInterval(t *testing.T) {
+	fmt.Println(leastInterval([]byte{'A', 'A', 'A', 'B', 'B', 'B'}, 2))
+}

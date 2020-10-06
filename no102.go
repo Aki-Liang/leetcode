@@ -26,27 +26,27 @@ package leetcode
  *     Right *TreeNode
  * }
  */
-func levelOrder(root *TreeNode) [][]int {
-	res := [][]int{}
-	if nil == root {
-		return res
-	}
+// func levelOrder(root *TreeNode) [][]int {
+// 	res := [][]int{}
+// 	if nil == root {
+// 		return res
+// 	}
 
-	queue := []*TreeNode{root}
-	for len(queue) > 0 {
-		layer := []int{}
-		length := len(queue)
-		for i := 0; i < length; i++ {
-			layer = append(layer, queue[i].Val)
-			if nil != queue[i].Left {
-				queue = append(queue, queue[i].Left)
-			}
-			if nil != queue[i].Right {
-				queue = append(queue, queue[i].Right)
-			}
-		}
-		res = append(res, layer)
-		queue = queue[length:]
-	}
-	return res
-}
+// 	queue := []*TreeNode{root}
+// 	for len(queue) > 0 {
+// 		layer := []int{}
+// 		length := len(queue)
+// 		for i := 0; i < length; i++ {
+// 			layer = append(layer, queue[i].Val)
+// 			if nil != queue[i].Left {
+// 				queue = append(queue, queue[i].Left)
+// 			}
+// 			if nil != queue[i].Right {
+// 				queue = append(queue, queue[i].Right)
+// 			}
+// 		}
+// 		res = append(res, layer)
+// 		queue = queue[length:]
+// 	}
+// 	return res
+// }
