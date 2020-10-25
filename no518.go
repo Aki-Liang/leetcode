@@ -26,14 +26,15 @@ package leetcode
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 func change(amount int, coins []int) int {
-	bp := make([]int, amount+1)
-	bp[0] = 1
 
+	dp := make([]int, amount+1)
+	dp[0] = 1
 	for _, c := range coins {
 		for i := c; i <= amount; i++ {
-			bp[i] += bp[i-c]
+			dp[i] += dp[i-c]
 		}
 	}
 
-	return bp[amount]
+	return dp[amount]
+
 }
