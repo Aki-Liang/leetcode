@@ -20,23 +20,13 @@ package leetcode
 
 // 输入: amount = 10, coins = [10]
 // 输出: 1
-//
-
-// 注意:
-
-// 你可以假设：
-
-// 0 <= amount (总金额) <= 5000
-// 1 <= coin (硬币面额) <= 5000
-// 硬币种类不超过 500 种
-// 结果符合 32 位符号整数
-// 通过次数30,525提交次数55,131
 
 // 来源：力扣（LeetCode）
 // 链接：https://leetcode-cn.com/problems/coin-change-2
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
 func change(amount int, coins []int) int {
+
 	dp := make([]int, amount+1)
 	dp[0] = 1
 	for _, c := range coins {
@@ -46,4 +36,5 @@ func change(amount int, coins []int) int {
 	}
 
 	return dp[amount]
+
 }
