@@ -32,7 +32,7 @@ package leetcode
 // 链接：https://leetcode-cn.com/problems/number-of-islands
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
-func find(parents []int, i int) int {
+func ifind(parents []int, i int) int {
 	root := i
 	for parents[root] != root {
 		root = parents[root]
@@ -45,9 +45,9 @@ func find(parents []int, i int) int {
 	return i
 }
 
-func union(parents []int, i, j int) {
-	ri := find(parents, i)
-	rj := find(parents, j)
+func iunion(parents []int, i, j int) {
+	ri := ifind(parents, i)
+	rj := ifind(parents, j)
 	if ri != rj {
 		parents[ri] = rj
 	}
@@ -72,11 +72,11 @@ func numIslands(grid [][]byte) int {
 			pos := i*m + j
 			if j+1 < m && grid[i][j+1] == '1' {
 				//如果右边是陆地，合并
-				union(parents, pos, pos+1)
+				iunion(parents, pos, pos+1)
 			}
 			if i+1 < n && grid[i+1][j] == '1' {
 				//如果下边是陆地，合并
-				union(parents, pos, pos+m)
+				iunion(parents, pos, pos+m)
 
 			}
 		}

@@ -50,17 +50,6 @@ package leetcode
 // }
 
 // 循环解法
-func swapPairs(head *ListNode) *ListNode {
-	pre := head
-	next := head.Next
-	for next != nil && next.Next != nil {
-		pre.Next = next.Next
-		next.Next = pre
-
-	}
-
-	return next
-}
 
 // func swapPairs(head *ListNode) *ListNode {
 // 	pre := &ListNode{

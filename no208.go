@@ -21,49 +21,49 @@ package leetcode
 // 链接：https://leetcode-cn.com/problems/implement-trie-prefix-tree
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
 
-type Trie struct {
-	next  [26]*Trie
-	isEnd bool
-}
+// type Trie struct {
+// 	next  [26]*Trie
+// 	isEnd bool
+// }
 
-/** Initialize your data structure here. */
-func Constructor() Trie {
-	return Trie{}
-}
+// /** Initialize your data structure here. */
+// func Constructor() Trie {
+// 	return Trie{}
+// }
 
-/** Inserts a word into the trie. */
-func (this *Trie) Insert(word string) {
-	node := this
-	for _, c := range word {
-		if node.next[c-'a'] == nil {
-			node.next[c-'a'] = &Trie{}
-		}
-		node = node.next[c-'a']
-	}
-	node.isEnd = true
-}
+// /** Inserts a word into the trie. */
+// func (this *Trie) Insert(word string) {
+// 	node := this
+// 	for _, c := range word {
+// 		if node.next[c-'a'] == nil {
+// 			node.next[c-'a'] = &Trie{}
+// 		}
+// 		node = node.next[c-'a']
+// 	}
+// 	node.isEnd = true
+// }
 
-/** Returns if the word is in the trie. */
-func (this *Trie) Search(word string) bool {
-	node := this
-	for _, c := range word {
-		if node = node.next[c-'a']; node == nil {
-			return false
-		}
-	}
-	return node.isEnd
-}
+// /** Returns if the word is in the trie. */
+// func (this *Trie) Search(word string) bool {
+// 	node := this
+// 	for _, c := range word {
+// 		if node = node.next[c-'a']; node == nil {
+// 			return false
+// 		}
+// 	}
+// 	return node.isEnd
+// }
 
-/** Returns if there is any word in the trie that starts with the given prefix. */
-func (this *Trie) StartsWith(prefix string) bool {
-	node := this
-	for _, c := range prefix {
-		if node = node.next[c-'a']; node == nil {
-			return false
-		}
-	}
-	return true
-}
+// /** Returns if there is any word in the trie that starts with the given prefix. */
+// func (this *Trie) StartsWith(prefix string) bool {
+// 	node := this
+// 	for _, c := range prefix {
+// 		if node = node.next[c-'a']; node == nil {
+// 			return false
+// 		}
+// 	}
+// 	return true
+// }
 
 /**
  * Your Trie object will be instantiated and called as such:

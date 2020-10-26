@@ -69,11 +69,11 @@ func Test_removeDuplicates(t *testing.T) {
 	fmt.Println(res)
 }
 
-func Test_merge(t *testing.T) {
-	// nums1 = [1,2,3,0,0,0], m = 3
-	// nums2 = [2,5,6],       n = 3
-	merge([]int{1, 2, 3, 0, 0, 0}, 3, []int{2, 5, 6}, 3)
-}
+// func Test_merge(t *testing.T) {
+// 	// nums1 = [1,2,3,0,0,0], m = 3
+// 	// nums2 = [2,5,6],       n = 3
+// 	merge([]int{1, 2, 3, 0, 0, 0}, 3, []int{2, 5, 6}, 3)
+// }
 
 func Test_maxArea(t *testing.T) {
 	res := maxArea([]int{1, 8, 6, 2, 5, 4, 8, 3, 7})
@@ -175,4 +175,29 @@ func Test_maxCoins(t *testing.T) {
 
 func Test_leastInterval(t *testing.T) {
 	fmt.Println(leastInterval([]byte{'A', 'A', 'A', 'B', 'B', 'B'}, 2))
+}
+
+func Test_numIslands(t *testing.T) {
+	fmt.Println(numIslands([][]byte{
+		[]byte{'1', '1', '0', '0', '0'},
+		[]byte{'1', '1', '0', '0', '0'},
+		[]byte{'0', '0', '1', '0', '0'},
+		[]byte{'0', '0', '0', '1', '1'},
+	}))
+}
+
+func Test_findCircleNum(t *testing.T) {
+	fmt.Println(findCircleNum([][]int{
+		[]int{1, 0, 1},
+		[]int{1, 1, 0},
+		[]int{1, 0, 1},
+	}))
+}
+
+func Test_solveNQueens(t *testing.T) {
+	fmt.Println(solveNQueens(4))
+}
+
+func Test_longestPalindrome(t *testing.T) {
+	fmt.Println(longestPalindrome("cbbd"))
 }
