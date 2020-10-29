@@ -1,5 +1,9 @@
 package leetcode
 
+import (
+	"math"
+)
+
 // 请你来实现一个 atoi 函数，使其能将字符串转换成整数。
 
 // 首先，该函数会根据需要丢弃无用的开头空格字符，直到寻找到第一个非空格的字符为止。接下来的转化规则如下：
@@ -47,3 +51,74 @@ package leetcode
 // 来源：力扣（LeetCode）
 // 链接：https://leetcode-cn.com/problems/string-to-integer-atoi
 // 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
+func myAtoi(s string) int {
+	a := &Automaton{
+		sign:  1,
+		ans:   0,
+		state: "start",
+		table: map[string][]string{
+			"start":     []string{"start", "signed", "in_number", "end"},
+			"signed":    {"end", "end", "in_number", "end"},
+			"in_number": {"end", "end", "in_number", "end"},
+			"end":       {"end", "end", "end", "end"},
+		},
+	}
+
+	for _, c := range s {
+		a.get(c)
+	}
+
+	return a.sign * a.ans
+}
+
+func min(a, b int) int {
+	if a > b {
+		return b
+	}
+	return a
+}
+
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
+type Automaton struct {
+	sign  int
+	ans   int
+	state string
+	table map[string][]string
+}
+
+func (a *Automaton) get(c rune) {
+	a.state = a.table[a.state][a.getCol(c)]
+	if a.state == "in_number" {
+		a.ans = a.ans*10 + int(c-'0')
+		if a.sign == 1 {
+			a.ans = min(a.ans, math.MaxInt32)
+		} else if a.ans*a.sign < math.MinInt32 {
+			a.ans = int(math.Abs(math.MinInt32))
+		}
+	} else if a.state == "signed" {
+		if c == '+' {
+			a.sign = 1
+		} else {
+			a.sign = -1
+		}
+	}
+}
+
+func (a *Automaton) getCol(c rune) int {
+	switch c {
+	case ' ':
+		return 0
+	case '+', '-':
+		return 1
+	case '0', '1', '2', '3', '4', '5', '6', '7', '8', '9':
+		return 2
+	}
+	return 3
+}

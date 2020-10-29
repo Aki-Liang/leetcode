@@ -85,25 +85,25 @@ func Test_isValid(t *testing.T) {
 	fmt.Println(res)
 }
 
-func Test_swapPairs(t *testing.T) {
-	//1->2->3->4
-	Node := &ListNode{
-		Val: 1,
-		Next: &ListNode{
-			Val: 2,
-			Next: &ListNode{
-				Val: 3,
-				Next: &ListNode{
-					Val:  4,
-					Next: nil,
-				},
-			},
-		},
-	}
+// func Test_swapPairs(t *testing.T) {
+// 	//1->2->3->4
+// 	Node := &ListNode{
+// 		Val: 1,
+// 		Next: &ListNode{
+// 			Val: 2,
+// 			Next: &ListNode{
+// 				Val: 3,
+// 				Next: &ListNode{
+// 					Val:  4,
+// 					Next: nil,
+// 				},
+// 			},
+// 		},
+// 	}
 
-	res := swapPairs(Node)
-	fmt.Println(res)
-}
+// 	res := swapPairs(Node)
+// 	fmt.Println(res)
+// }
 
 func Test_reverseKGroup(t *testing.T) {
 	//1->2->3->4
@@ -161,9 +161,9 @@ func Test_longestValidParentheses(t *testing.T) {
 	fmt.Println(longestValidParentheses("(()"))
 }
 
-func Test_minPathSum(t *testing.T) {
-	fmt.Println(minPathSum([][]int{{1, 3, 1}, {1, 5, 1}, {4, 2, 1}}))
-}
+// func Test_minPathSum(t *testing.T) {
+// 	fmt.Println(minPathSum([][]int{{1, 3, 1}, {1, 5, 1}, {4, 2, 1}}))
+// }
 
 func Test_numDecodings(t *testing.T) {
 	fmt.Println(numDecodings("1210121"))
@@ -200,4 +200,8 @@ func Test_solveNQueens(t *testing.T) {
 
 func Test_longestPalindrome(t *testing.T) {
 	fmt.Println(longestPalindrome("cbbd"))
+}
+
+func Test_myAtoi(t *testing.T) {
+	fmt.Println(myAtoi("-91283472332"))
 }
