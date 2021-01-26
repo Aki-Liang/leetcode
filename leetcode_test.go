@@ -5,6 +5,10 @@ import (
 	"testing"
 )
 
+func Test_maximumProduct(t *testing.T) {
+	fmt.Println(maximumProduct([]int{1, 2, 3, 4}))
+}
+
 func Test_tribonacci(t *testing.T) {
 	res := tribonacci(4)
 	if 4 != res {
@@ -204,4 +208,18 @@ func Test_longestPalindrome(t *testing.T) {
 
 func Test_myAtoi(t *testing.T) {
 	fmt.Println(myAtoi("-91283472332"))
+}
+
+func Test_kClosest(t *testing.T) {
+	fmt.Println(kClosest([][]int{
+		{3, 3},
+		{5, -1},
+		{-2, 4},
+	}, 2))
+}
+
+func Test_reconstructQueue(t *testing.T) {
+	fmt.Println(reconstructQueue([][]int{
+		{7, 0}, {4, 4}, {7, 1}, {5, 0}, {6, 1}, {5, 2},
+	}))
 }
