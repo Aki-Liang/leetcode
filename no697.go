@@ -32,12 +32,10 @@ func findShortestSubArray(nums []int) int {
     maxCount := math.MinInt64
     for index, num := range nums {
         c, ok := count[num]
-        if ok {
-            right[num] = index
-
-        } else {
+        if !ok {
             left[num] = index
         }
+        right[num] = index
         c++
         count[num] = c
         if maxCount < c {
